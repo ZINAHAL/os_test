@@ -38,8 +38,13 @@ class Game:
                 print("Incorrect input detected, please choose 1 or 2")
 
     # function to add the character's name/mutator method
+    # github change
     def addName(self):
-        self.characterName = input("Enter your character's name:\n")
+        tempCharacter = input("Enter your character's name:\n")
+	if bool(tempCharacter and not tempCharacter.isspace()) is False:
+		raise EmptyInputError("Invalid name", "name must not be empty")
+	else:
+		self.characterName = tempCharacter
 
 class Scenario(Game):
     # initialise with inheritance from Game class
@@ -304,6 +309,14 @@ class Action:
             print(f"Stolen amount of goods {self.score}")
         exit()
 
+# for github change
+class EmptyInputError(Exception):
+    def __init__(self, expression, message):
+        self.expression = expression
+	self.message = message
+
+    def __str__(self):
+	return self.expression + " | " + self.message
 
 game1 = Game(None, None)    # creates game1 object
 # run functions from Game class
